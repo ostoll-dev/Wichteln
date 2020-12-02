@@ -5,42 +5,17 @@ import java.lang.Math;
 
 public class Wichteln {
 
-	public static void main(String[] args) {
+	public static String[] WichtelnAusgabe(String[] neuerTeilnehmer, int anzahlTeilnehmer) {
 		
 		boolean kontrolle = true;
 		
-		int doItAgain = 0;
 		int maxLaengeName = 0;
-		int anzahlTeilnehmer = 0;
 		int endlosschleifeFailOver = 0;
-		
-		String anzahlStr = null;
-		
-		//Abfrage, wie viele Teilnehmer teilnehmen sollen
-		do {
-			doItAgain = 0;
-			try {
-				
-				anzahlStr = JOptionPane.showInputDialog(null, "Wie viele Teilnehmer willst du?");
-				anzahlTeilnehmer = Integer.parseInt(anzahlStr);
-			} catch(NumberFormatException e) {
-				JOptionPane.showMessageDialog(null, "Das war wohl keine Zahl...");
-				doItAgain = 1;
-			}
-		} while(doItAgain == 1);
-		
-		
-		String[] neuerTeilnehmer = new String[anzahlTeilnehmer];
 		
 		String[] zieherString = new String[anzahlTeilnehmer];
 		String[] gezogenerString = new String[anzahlTeilnehmer];
 		int zieher[] = new int[anzahlTeilnehmer];
 		int gezogener[] = new int[anzahlTeilnehmer];
-		
-		//Eingabe aller Teilnehmer
-		for(int i = 0 ; i < anzahlTeilnehmer ; i++) {
-			neuerTeilnehmer[i] = JOptionPane.showInputDialog(null, "Gib einen weiteren Teilnehmer ein:");
-		}
 		
 		//Herausfinden, welcher Name der längste ist, um die Ausgabe schöner zu gestalten
 		try {
@@ -49,7 +24,6 @@ public class Wichteln {
 			}
 		} catch(NullPointerException e) {
 			JOptionPane.showMessageDialog(null, "Du hast wohl ein Feld leer gelassen, da gab es eine NullPointerException...\nVersuch's nochmal...");
-			return;
 		}
 		
 		//Zuweisung von zufälligen Zahlen in die beiden Zahlenarrays
@@ -80,7 +54,6 @@ public class Wichteln {
 				i = 0;
 				kontrolle = true;
 				endlosschleifeFailOver = 0;
-				JOptionPane.showMessageDialog(null,"Endlosschleife eingetreten");
 			}
 		}
 		
@@ -96,11 +69,12 @@ public class Wichteln {
 			gezogenerString[i] = (neuerTeilnehmer[gezogener[i]-1]);
 		}
 
-		//Ausgabe des Ziehergebnisses
+		String[] ausgabe = new String[anzahlTeilnehmer];
+		
 		for(int i = 0; i < anzahlTeilnehmer ; i++) {
-			
-			System.out.println(zieherString[i] + " zieht: " + gezogenerString[i]);
-			
+			ausgabe[i] = zieherString[i] + " zieht: " + gezogenerString[i];
 		}
+		
+		return ausgabe;
 	}
 }
